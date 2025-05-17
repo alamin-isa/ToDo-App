@@ -11,12 +11,69 @@
         <h1>TODO list</h1>
         <input type="text" id="task-input" placeholder="Enter Your list">
         <button type="button" id="add-task-input">Add</button>
+        <p id="error"></p>
+        <div id="check"></div>
+        <!-- class="error" -->
         <ul id="task-list">
-            <li>Wash clothes</li>
+            <!-- <li>Wash clothes</li>
             <li>Read book</li>
-            <li>Sleep</li>
+            <li>Sleep</li> -->
         </ul>
    
    </div> 
+   <script>
+    const taskInput = document.getElementById("task-input");
+    const addTaskInput = document.getElementById("add-task-input");
+    const taskList = document.getElementById("task-list");
+    const error = document.getElementById("error");
+    const check = document.getElementById("check");
+    
+
+    // console.log(now)
+    // const error = document.getElementsByClassName("error")[0];
+
+        function dateFormatter() {
+            const now = new Date();
+            return now.toLocaleDateString();
+            
+            
+            // now.getDay()
+            // now.getDate()
+            // console.log(now.getDay())
+            // console.log(now.getDate())
+        }
+
+        addTaskInput.addEventListener("click", function () {
+            const taskValue = taskInput.value.trim();
+            if (taskValue === "") {
+                // alert("Please enter a task.");
+                error.textContent = "Please enter a task."
+                error.classList.add("error")
+                // error.style.color = "red"
+                // error.style.fontSize = "10px"
+                return;
+            }
+            if (taskValue != "") {
+                error.textContent = "";
+            }
+
+            const li = document.createElement("li");
+            const span = document.createElement("span");
+            span.textContent = dateFormatter();
+
+            li.textContent = taskValue;
+            li.addEventListener("click", function () {
+                // check.textContent = "Please enter a task."
+                li.classList.toggle("check");
+            })
+            
+            taskList.appendChild(li);
+            taskList.appendChild(span)
+            taskInput.value = "";
+        })
+
+        // const names = ["Dog", "Cat", "Mouse"]
+        // console.log(names[0])
+   </script>
 </body>
 </html>
